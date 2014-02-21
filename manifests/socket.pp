@@ -20,8 +20,8 @@ define opendkim::socket(
     }
   }
   concat::fragment{ $socket:
-    target  => '/etc/default/opendkim',
-    content => "SOCKET=$socket # ${name}\n",
+    target  => '/etc/opendkim.conf',
+    content => "Socket ${socket} # ${name}\n",
     order   => 10,
     notify  => Service[$opendkim::params::service];
   }
