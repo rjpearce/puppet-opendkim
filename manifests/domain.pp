@@ -2,7 +2,7 @@ define opendkim::domain(
   $private_key,
   $domain=$name,
   $selector='mail',
-  $key_folder='/etc/dkim'
+  $key_folder=$::opendkim::params::key_folder
 ) {
 
   file {
