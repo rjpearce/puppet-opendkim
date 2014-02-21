@@ -8,6 +8,10 @@ class opendkim::params {
       $package = 'opendkim'
       $service = 'opendkim'
     }
+    'Fedora', 'CentOS', 'RedHat': {
+      $package = 'opendkim'
+      $service = 'opendkim'
+    }
     default: {
       fail("Unsupported operatingsystem ${::operatingsystem}, fork me baby.")
     }
