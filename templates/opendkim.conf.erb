@@ -23,7 +23,11 @@ UMask			<%= scope.lookupvar('::opendkim::params::umask') %>
 # and the verifier.  From is oversigned by default in the Debian pacakge
 # because it is often the identity key used by reputation systems and thus
 # somewhat security sensitive.
+<% if scope.lookupvar('::opendkim::config::oversignheaders') != '' -%>
 OversignHeaders		<%= scope.lookupvar('::opendkim::config::oversignheaders') %>
+<% else -%>
+# OversignHeaders is disabled
+<% end -%>
 
 # List domains to use for RFC 6541 DKIM Authorized Third-Party Signatures
 # (ATPS) (experimental)

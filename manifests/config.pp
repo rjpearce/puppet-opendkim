@@ -1,3 +1,4 @@
+# you cannot pass undef to oversignheaders, so use '' to disable
 class opendkim::config(
   $syslog                  = $opendkim::params::syslog,
   $umask                   = $opendkim::params::umask,
