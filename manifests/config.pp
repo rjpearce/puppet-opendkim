@@ -12,9 +12,9 @@ class opendkim::config(
   }
 
   concat::fragment {
-    "opendkim config":
-      target => '/etc/opendkim.conf',
-      content => template("opendkim/opendkim.conf.erb"),
+    'opendkim config':
+      target  => '/etc/opendkim.conf',
+      content => template('opendkim/opendkim.conf.erb'),
       order   => 01;
   }
 
@@ -26,9 +26,9 @@ class opendkim::config(
     }
 
     concat::fragment {
-      "opendkim default config":
-        target => '/etc/default/opendkim',
-        content => template("opendkim/opendkim_default.erb"),
+      'opendkim default config':
+        target  => '/etc/default/opendkim',
+        content => template('opendkim/opendkim_default.erb'),
         order   => 01;
     }
   }
