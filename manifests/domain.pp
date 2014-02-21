@@ -17,7 +17,7 @@ define opendkim::domain(
     target  => '/etc/opendkim.conf',
     content => "Domain ${domain}\nKeyFile ${key_folder}/${domain}.key\nSelector ${selector}\n\n",
     order   => 10,
-    require => File["$key_folder/$domain.key"],
+    require => File["${key_folder}/${domain}.key"],
     notify  => Service[$opendkim::params::service];
   }
 
