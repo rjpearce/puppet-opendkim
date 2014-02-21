@@ -4,19 +4,19 @@ class opendkim(
 ) inherits ::opendkim::params {
 
   package { $opendkim::params::package:
-    alias  => 'opendkim',
-    ensure => $ensure_version
+    ensure => $ensure_version,
+    alias  => 'opendkim'
   }
   service { $opendkim::params::service:
-    enable  => true,
     ensure  => running,
+    enable  => true,
     require => Package['opendkim']
   }
   file { '/etc/dkim':
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',
-    mode   => 0644;
+    mode   => '0644'
   }
   if ($default_config) {
     include opendkim::config
