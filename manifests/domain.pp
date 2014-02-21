@@ -7,10 +7,11 @@ define opendkim::domain(
 
   file {
     "${key_folder}/${domain}.key":
-      owner  => 'root',
-      group  => 'root',
-      mode   => 0640,
-      source => $private_key;
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0640',
+      source  => $private_key,
+      require => Package[$::opendkim::params::package]
   }
   concat::fragment{ $name:
     target  => '/etc/opendkim.conf',

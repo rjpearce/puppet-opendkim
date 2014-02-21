@@ -5,20 +5,31 @@ class opendkim::config(
   $oversignheaders         = $opendkim::params::oversignheaders,
 ) inherits ::opendkim::params {
 
-  concat { ['/etc/opendkim.conf', '/etc/default/opendkim']:
+  concat { '/etc/opendkim.conf':
     owner => root,
     group => root,
     mode  => '0644';
   }
+
   concat::fragment {
     "opendkim config":
       target => '/etc/opendkim.conf',
       content => template("opendkim/opendkim.conf.erb"),
       order   => 01;
+  }
 
-    "opendkim default config":
-      target => '/etc/default/opendkim',
-      content => template("opendkim/opendkim_default.erb"),
-      order   => 01;
+  if ($::opendkim::params::service_flavor == 'Debian') {
+    concat { $::opendkim::params::service_config:
+      owner => root,
+      group => root,
+      mode  => '0644';
+    }
+
+    concat::fragment {
+      "opendkim default config":
+        target => '/etc/default/opendkim',
+        content => template("opendkim/opendkim_default.erb"),
+        order   => 01;
+    }
   }
 }
