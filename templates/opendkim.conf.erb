@@ -7,10 +7,10 @@
 # /usr/share/doc/opendkim/examples/opendkim.conf.sample.
 
 # Log to syslog
-Syslog		<%= scope.lookupvar('::opendkim::params::syslog') %>
+<% if @syslog != false %>Syslog <%= @syslog %><% end %>
 # Required to use local socket with MTAs that access the socket as a non-
 # privileged user (e.g. Postfix)
-UMask			<%= scope.lookupvar('::opendkim::params::umask') %>
+<% if @umask != false %>UMask <%= @umask %><% end %>
 
 # Commonly-used options; the commented-out versions show the defaults.
 #Canonicalization	simple
@@ -23,7 +23,7 @@ UMask			<%= scope.lookupvar('::opendkim::params::umask') %>
 # and the verifier.  From is oversigned by default in the Debian pacakge
 # because it is often the identity key used by reputation systems and thus
 # somewhat security sensitive.
-OversignHeaders		<%= scope.lookupvar('::opendkim::params::oversignheaders') %>
+<% if @oversignheaders != false %>OversignHeaders <%= @oversignheaders %><% end %>
 
 # List domains to use for RFC 6541 DKIM Authorized Third-Party Signatures
 # (ATPS) (experimental)
