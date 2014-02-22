@@ -10,7 +10,10 @@ class opendkim(
   service { $opendkim::params::service:
     ensure  => running,
     enable  => true,
-    require => Package['opendkim']
+    require => [
+      Package['opendkim'],
+      Class['opendkim::config'],
+    ]
   }
   file { '/etc/dkim':
     ensure => 'directory',

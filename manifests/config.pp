@@ -6,9 +6,9 @@ class opendkim::config(
 ) inherits ::opendkim::params {
 
   concat { '/etc/opendkim.conf':
-    owner => root,
-    group => root,
-    mode  => '0644';
+    owner  => root,
+    group  => root,
+    mode   => '0644',
   }
 
   concat::fragment {
