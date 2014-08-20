@@ -7,6 +7,7 @@ class opendkim::params {
     'Ubuntu', 'Debian': {
       $package = 'opendkim'
       $service = 'opendkim'
+      $user    = 'opendkim'
     }
     default: {
       fail("Unsupported operatingsystem ${::operatingsystem}, fork me baby.")

@@ -1,14 +1,15 @@
 define opendkim::domain(
   $private_key,
-  $domain=$name,
-  $selector='mail',
-  $key_folder='/etc/dkim',
-  $signing_key=$name,
+  $domain      = $name,
+  $selector    = 'mail',
+  $key_folder  = '/etc/dkim',
+  $signing_key = $name,
+  $user        = $opendkim::params::user,
 ) {
   $key_file = "${key_folder}/$selector-${domain}.key"
 
   file { $key_file:
-      owner  => 'root',
+      owner  => $user,
       group  => 'root',
       mode   => 0600,
       source => $private_key;
