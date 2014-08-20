@@ -20,7 +20,6 @@ define opendkim::domain(
     concat::fragment{ 'opendkim_domain_config':
       target  => '/etc/opendkim.conf',
       content => "Keytable /etc/opendkim_keytable.conf\nSigningTable /etc/opendkim_signingtable.conf\n\n",
-      notify  => Service[$opendkim::params::service],
     }
   }
 
@@ -29,14 +28,12 @@ define opendkim::domain(
     content => "${signing_key} ${selector}._domainkey.${domain}\n",
     order   => 10,
     require => File[$key_file],
-    notify  => Service[$opendkim::params::service],
   }
   concat::fragment{ "keytable_${name}":
     target  => '/etc/opendkim_keytable.conf',
     content => "${selector}._domainkey.${domain} ${domain}:${selector}:$key_file\n",
     order   => 10,
     require => File[$key_file],
-    notify  => Service[$opendkim::params::service],
   }
 
 }
