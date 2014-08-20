@@ -4,7 +4,7 @@ class opendkim::config(
   $oversignheaders         = $opendkim::params::oversignheaders,
 ) inherits ::opendkim::params {
 
-  concat { ['/etc/opendkim.conf', '/etc/default/opendkim']:
+  concat { ['/etc/opendkim.conf', '/etc/default/opendkim', '/etc/opendkim_keytable.conf', '/etc/opendkim_signingtable.conf']:
     owner => root,
     group => root,
     mode  => '0644';
