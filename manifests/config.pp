@@ -1,5 +1,6 @@
 class opendkim::config(
   $syslog                  = $opendkim::params::syslog,
+  $syslog_success          = $opendkim::params::syslog_success,
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
 ) inherits ::opendkim::params {

@@ -8,6 +8,7 @@
 
 # Log to syslog
 <% if @syslog != false %>Syslog <%= @syslog %><% end %>
+<% if @syslog_success != false %>SyslogSuccess <%= @syslog_success %><% end %>
 # Required to use local socket with MTAs that access the socket as a non-
 # privileged user (e.g. Postfix)
 <% if @umask != false %>UMask <%= @umask %><% end %>

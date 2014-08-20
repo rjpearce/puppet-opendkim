@@ -1,5 +1,6 @@
 class opendkim::params {
   $syslog = 'yes'
+  $syslog_success = 'false'
   $umask  = '002'
   $oversignheaders = 'From'
 
