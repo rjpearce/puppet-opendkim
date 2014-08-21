@@ -1,13 +1,15 @@
 class opendkim::config(
   $syslog                  = $opendkim::params::syslog,
+  $syslog_success          = $opendkim::params::syslog_success,
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
 ) inherits ::opendkim::params {
 
-  concat { ['/etc/opendkim.conf', '/etc/default/opendkim']:
-    owner => root,
-    group => root,
-    mode  => '0644';
+  concat { ['/etc/opendkim.conf', '/etc/default/opendkim', '/etc/opendkim_keytable.conf', '/etc/opendkim_signingtable.conf']:
+    owner  => root,
+    group  => root,
+    mode   => '0644',
+    notify => Service[$opendkim::params::service],
   }
   concat::fragment {
     "opendkim config":
