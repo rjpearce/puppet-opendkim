@@ -1,3 +1,32 @@
+# == Class: opendkim
+#
+# Manage OpenDKIM.
+# Main class to install, enable and setup default configuration.
+# OS Support: Debian, Ubuntu
+#
+# === Parameters
+#
+# [*default_config*]
+#   Set true to use the default configuration specified in opendkim::config.
+#   Boolean, default is true.
+#
+# [*ensure_version*]
+#   State of the opendkim package. Valid values are present (also called
+#   installed), absent, purged, held, latest. Default is installed.
+#
+# === Examples
+#
+#  opendkim::domain { 'example.com':
+#      private_key => 'puppet:///modules/mymodule/example.com.key',
+#  }
+#
+#   See opendkim init for complete example.
+#
+# === Authors
+#
+#  rjpearce https://github.com/rjpearce
+#
+
 define opendkim::domain(
   $private_key,
   $domain      = $name,
@@ -35,6 +64,5 @@ define opendkim::domain(
     order   => 10,
     require => File[$key_file],
   }
-
 }
 
