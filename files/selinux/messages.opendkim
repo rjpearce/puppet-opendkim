@@ -1,0 +1,3 @@
+Feb 21 18:50:05 frf kernel: type=1400 audit(1393026605.540:13756): avc:  denied  { name_bind } for  pid=27688 comm="opendkim" src=8891 scontext=unconfined_u:system_r:dkim_milter_t:s0 tcontext=system_u:object_r:port_t:s0 tclass=tcp_socket
+Feb 21 18:50:32 frf kernel: type=1400 audit(1393026632.614:13759): avc:  denied  { dac_override } for  pid=27868 comm="opendkim" capability=1  scontext=unconfined_u:system_r:dkim_milter_t:s0 tcontext=unconfined_u:system_r:dkim_milter_t:s0 tclass=capability
+type=AVC msg=audit(1402051399.771:785730): avc:  denied  { read write } for  pid=31574 comm="cleanup" path="socket:[52571246]" dev=sockfs ino=52571246 scontext=unconfined_u:system_r:postfix_cleanup_t:s0 tcontext=unconfined_u:system_r:postfix_smtpd_t:s0 tclass=tcp_socket
