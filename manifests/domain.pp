@@ -8,7 +8,7 @@ define opendkim::domain(
   file {
     "${key_folder}/${domain}.key":
       owner   => 'root',
-      group   => 'root',
+      group   => 'opendkim',
       mode    => '0640',
       source  => $private_key,
       require => Package[$::opendkim::params::package]
