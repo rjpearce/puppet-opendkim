@@ -4,7 +4,7 @@
 
 Puppet module to manage OpenDKIM
 
-Currently only supports Debian/Ubuntu, fork me to support more distributions.
+Currently only supports Debian/Ubuntu/CentOS/Red Hat, fork me to support more distributions.
 
 * `opendkim` : Main class to install, enable and setup default configuration.
 * `opendkim::config` : Class to setup OpenDKIM main configuration files.
@@ -13,8 +13,9 @@ Currently only supports Debian/Ubuntu, fork me to support more distributions.
 
 Setup your DKIM keys:
 
-    openssl genrsa -out example.com.key 1024
-    openssl rsa -in example.com.key -out example.com.pub -pubout -outform PEM
+    export DOMAIN=example.com
+    openssl genrsa -out $DOMAIN.key 1024
+    openssl rsa -in $DOMAIN.key -out $DOMAIN.pub -pubout -outform PEM
     Move the private key file into your own puppet module
 
 Add your public key to a new TXT record in DNS.
