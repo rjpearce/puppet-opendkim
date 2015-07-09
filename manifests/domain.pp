@@ -40,7 +40,7 @@ define opendkim::domain(
   file { $key_file:
       owner  => $user,
       group  => 'root',
-      mode   => 0600,
+      mode   => '0600',
       source => $private_key;
   }
 
