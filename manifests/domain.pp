@@ -38,6 +38,7 @@ define opendkim::domain(
   $key_file = "${key_folder}/$selector-${domain}.key"
 
   file { $key_file:
+      ensure => file,
       owner  => $user,
       group  => 'root',
       mode   => '0600',
