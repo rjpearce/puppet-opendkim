@@ -38,10 +38,10 @@ define opendkim::domain(
 ) {
 
   if (empty($private_key_source) and empty($private_key_content)) {
-    fail("one of private_key_source or private_key_content must be not empty!")
+    fail('one of private_key_source or private_key_content must be not empty!')
   }
 
-  $key_file = "${key_folder}/$selector-${domain}.key"
+  $key_file = "${key_folder}/${selector}-${domain}.key"
 
   file { $key_file:
       ensure  => file,
@@ -68,7 +68,7 @@ define opendkim::domain(
   }
   concat::fragment{ "keytable_${name}":
     target  => '/etc/opendkim_keytable.conf',
-    content => "${selector}._domainkey.${domain} ${domain}:${selector}:$key_file\n",
+    content => "${selector}._domainkey.${domain} ${domain}:${selector}:${key_file}\n",
     order   => 10,
     require => File[$key_file],
   }
