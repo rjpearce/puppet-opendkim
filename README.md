@@ -69,6 +69,6 @@ Configuration options for adding a Domain to OpenDKIM:
     }
 
 Dependencies:
-  concat
+https://github.com/puppetlabs/puppetlabs-concat
 
 
