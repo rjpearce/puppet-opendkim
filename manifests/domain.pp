@@ -30,11 +30,11 @@
 define opendkim::domain(
   $private_key_source  = undef,
   $private_key_content = undef,
-  $domain      = $name,
-  $selector    = 'mail',
-  $key_folder  = '/etc/dkim',
-  $signing_key = $name,
-  $user        = $opendkim::params::user,
+  $domain              = $name,
+  $selector            = 'mail',
+  $key_folder          = '/etc/dkim',
+  $signing_key         = $name,
+  $user                = $opendkim::params::user,
 ) {
 
   if (empty($private_key_source) and empty($private_key_content)) {
@@ -44,10 +44,10 @@ define opendkim::domain(
   $key_file = "${key_folder}/$selector-${domain}.key"
 
   file { $key_file:
-      ensure => file,
-      owner  => $user,
-      group  => 'root',
-      mode   => '0600',
+      ensure  => file,
+      owner   => $user,
+      group   => 'root',
+      mode    => '0600',
       source  => $private_key_source,
       content => $private_key_content;
   }
