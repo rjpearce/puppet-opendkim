@@ -31,7 +31,7 @@ Typical usage:
       interface => 'localhost';
     }
     opendkim::domain { 'example.com':
-      private_key => 'puppet:///modules/mymodule/example.com.key',
+      private_key_source => 'puppet:///modules/mymodule/example.com.key',
     }
 
 Configuration options for adding a Socket to OpenDKIM:
@@ -58,14 +58,14 @@ Configuration options for adding a Socket to OpenDKIM:
 Configuration options for adding a Domain to OpenDKIM:
 
     opendkim::domain { 'example.com':
-      private_key => 'puppet:///modules/mymodule/example.com.key',
+      private_key_source => 'puppet:///modules/mymodule/example.com.key',
     }
 
     opendkim::domain { 'example with custom key folder, selector and domain name':
-      domain      => 'myexampleduck.com
-      private_key => 'puppet:///modules/mymodule/myexampleduck.com.key',
-      selector    => 'duck',
-      key_folder  => '/etc/duck';
+      domain             => 'myexampleduck.com
+      private_key_source => 'puppet:///modules/mymodule/myexampleduck.com.key',
+      selector           => 'duck',
+      key_folder         => '/etc/duck';
     }
 
 Dependencies:
