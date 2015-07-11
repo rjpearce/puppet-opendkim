@@ -1,0 +1,7 @@
+fixtures:
+  forge_modules:
+    concat: 'puppetlabs/concat'
+    stdlib: 'puppetlabs/stdlib'
+  symlinks:
+    opendkim: "#{source_dir}"
+
