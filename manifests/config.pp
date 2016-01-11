@@ -13,6 +13,9 @@
 # [*oversignheaders*]
 #   Inherited from params class.
 #
+# [*internalhosts*]
+#   Inherited from params class.
+#
 # === Examples
 #
 #   See opendkim init for complete example.
@@ -28,6 +31,7 @@ class opendkim::config(
   $syslog_success          = $opendkim::params::syslog_success,
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
+  $internalhosts           = $opendkim::params::internalhosts,
 ) inherits ::opendkim::params {
 
   concat { ['/etc/opendkim.conf', '/etc/default/opendkim', '/etc/opendkim_keytable.conf', '/etc/opendkim_signingtable.conf']:

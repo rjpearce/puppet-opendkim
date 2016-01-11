@@ -26,6 +26,8 @@
 # somewhat security sensitive.
 <% if @oversignheaders != false %>OversignHeaders <%= @oversignheaders %><% end %>
 
+InternalHosts <%= @internalhosts.join(',') %>
+
 # List domains to use for RFC 6541 DKIM Authorized Third-Party Signatures
 # (ATPS) (experimental)
 #ATPSDomains		example.com
