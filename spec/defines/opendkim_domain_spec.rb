@@ -40,5 +40,39 @@ describe 'opendkim::domain', :type => :define do
           )
         end
     end
+    describe 'for example.com domain with custom selector and subdomains' do
+        let(:params) do
+            default_params.merge( {
+                :selector    => 'testselector',
+                :subdomains  => true,
+            } )
+        end
+        it do
+            should contain_file('/etc/dkim/testselector-example.com.key').with(
+                :source => 'puppet:///path/to/example.com.key',
+                :owner  => 'opendkim',
+                :group  => 'root',
+                :mode   => '0600',
+            )
+        end
+        it do
+            should contain_concat__fragment('keytable_example.com').with(
+                'target'  => '/etc/opendkim_keytable.conf',
+                'content' => %r{^testselector._domainkey.example.com\sexample.com:testselector:/etc/dkim/testselector-example.com.key}m,
+            )
+        end
+        it do
+          should contain_concat__fragment('signingtable_example.com').with(
+            'target'  => '/etc/opendkim_signingtable.conf',
+            'content' => %r{^example.com\stestselector._domainkey.example.com}m,
+          )
+        end
+        it do
+          should contain_concat__fragment('signingtable_example.com_subdomains').with(
+            'target'  => '/etc/opendkim_signingtable.conf',
+            'content' => %r{^\.example\.com\stestselector\._domainkey\.example\.com}m,
+          )
+        end
+    end
 end
 

@@ -35,6 +35,7 @@ define opendkim::domain(
   $key_folder          = '/etc/dkim',
   $signing_key         = $name,
   $user                = $opendkim::params::user,
+  $subdomains          = false,
 ) {
 
   if (empty($private_key_source) and empty($private_key_content)) {
@@ -65,6 +66,14 @@ define opendkim::domain(
     content => "${signing_key} ${selector}._domainkey.${domain}\n",
     order   => 10,
     require => File[$key_file],
+  }
+  if ($subdomains) {
+    concat::fragment{ "signingtable_${name}_subdomains":
+      target  => '/etc/opendkim_signingtable.conf',
+      content => ".${signing_key} ${selector}._domainkey.${domain}\n",
+      order   => 10,
+      require => File[$key_file],
+    }
   }
   concat::fragment{ "keytable_${name}":
     target  => '/etc/opendkim_keytable.conf',
