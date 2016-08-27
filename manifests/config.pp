@@ -3,6 +3,8 @@ class opendkim::config(
   $syslog                  = $opendkim::params::syslog,
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
+  $logwhy                  = $opendkim::params::logwhy,
+  $milterdebug             = $opendkim::params::milterdebug,
 ) inherits ::opendkim::params {
 
   concat { '/etc/opendkim.conf':

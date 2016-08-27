@@ -36,3 +36,9 @@ OversignHeaders		<%= scope.lookupvar('::opendkim::config::oversignheaders') %>
 # Sign for example.com with key in /etc/mail/dkim.key using
 # selector '2007' (e.g. 2007._domainkey.example.com)
 
+<% if scope.lookupvar('::opendkim::config::logwhy') != '' -%>
+LogWhy yes
+<% end -%>
+<% if scope.lookupvar('::opendkim::config::milterdebug') != '' -%>
+MilterDebug <%= scope.lookupvar('::opendkim::config::milterdebug') %>
+<% end -%>
