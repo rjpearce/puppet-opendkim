@@ -1,0 +1,21 @@
+{
+    "name": "rjpearce-opendkim",
+    "version": "0.0.1",
+    "author": "Richard Pearce",
+    "license": "Apache-2.0",
+    "summary": "A module to manage OpenDKIM",
+    "source": "https://github.com/rjpearce/puppet-opendkim",
+    "project_page": "https://forge.puppetlabs.com/rjpearce/opendkim",
+    "issues_url": "https://github.com/rjpearce/puppet-opendkim/issues",
+    "tags": ["opendkim"],
+    "operatingsystem_support": [
+      {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "14.04", "12.04" ]
+      }
+      ],
+    "dependencies": [
+      { "name": "puppetlabs/concat" }
+    ],
+    "data_provider": "hiera"
+}
