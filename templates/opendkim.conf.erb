@@ -42,3 +42,6 @@ LogWhy yes
 <% if scope.lookupvar('::opendkim::config::milterdebug') != '' -%>
 MilterDebug <%= scope.lookupvar('::opendkim::config::milterdebug') %>
 <% end -%>
+
+KeyTable     /etc/opendkim/KeyTable
+SigningTable /etc/opendkim/SigningTable
