@@ -16,6 +16,14 @@
 # [*internalhosts*]
 #   Inherited from params class.
 #
+# [*additional_parameters*]
+#   Hash of parameters to add to opendkim.conf file.
+#   Defaults to an empty hash.
+#   Example (in yaml for hiera):
+#
+#   opendkim::config::additional_parameters:
+#     DNSTimeout: 25
+#
 # === Examples
 #
 #   See opendkim init for complete example.
@@ -32,6 +40,7 @@ class opendkim::config(
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
   $internalhosts           = $opendkim::params::internalhosts,
+  $additional_parameters   = {},
 ) inherits ::opendkim::params {
 
   concat { ['/etc/opendkim.conf', '/etc/default/opendkim', '/etc/opendkim_keytable.conf', '/etc/opendkim_signingtable.conf']:

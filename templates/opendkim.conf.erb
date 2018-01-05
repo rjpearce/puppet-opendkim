@@ -32,6 +32,9 @@ InternalHosts <%= @internalhosts.join(',') %>
 # (ATPS) (experimental)
 #ATPSDomains		example.com
 
+<% @additional_parameters.each do | key, value| -%>
+<%= key.ljust(20,' ') %>  <%= value %>
+<% end -%>
+
 # Sign for example.com with key in /etc/mail/dkim.key using
 # selector '2007' (e.g. 2007._domainkey.example.com)
-
