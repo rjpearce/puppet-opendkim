@@ -33,7 +33,11 @@ InternalHosts <%= @internalhosts.join(',') %>
 #ATPSDomains		example.com
 
 <% @additional_parameters.each do | key, value| -%>
+   <%- if ( value.is_a? Array ) -%>
+<%= key.ljust(20,' ') %>  <%= value.join(',') %>
+   <%- else -%>
 <%= key.ljust(20,' ') %>  <%= value %>
+   <%- end -%>
 <% end -%>
 
 # Sign for example.com with key in /etc/mail/dkim.key using
