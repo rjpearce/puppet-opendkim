@@ -16,6 +16,16 @@
 # [*internalhosts*]
 #   Inherited from params class.
 #
+# [*create_sockets*]
+#   hash to create sockets (using define opendkim::socket)
+#   Example (iny yaml for hiera):
+#
+#   opendkim::config::create_sockets:
+#     localport:
+#       type: 'inet'
+#       interface: 127.0.0.1
+#       port: 60003
+#
 # === Examples
 #
 #   See opendkim init for complete example.
@@ -32,6 +42,7 @@ class opendkim::config(
   $umask                   = $opendkim::params::umask,
   $oversignheaders         = $opendkim::params::oversignheaders,
   $internalhosts           = $opendkim::params::internalhosts,
+  $create_sockets          = {},
 ) inherits ::opendkim::params {
 
   concat { ['/etc/opendkim.conf', '/etc/default/opendkim', '/etc/opendkim_keytable.conf', '/etc/opendkim_signingtable.conf']:
@@ -71,4 +82,6 @@ class opendkim::config(
       content => "###### MANAGED BY PUPPET\n",
       order   => 01;
   }
+
+  create_resources('::opendkim::socket', $create_sockets)
 }
