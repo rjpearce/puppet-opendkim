@@ -14,6 +14,10 @@
 #   State of the opendkim package. Valid values are present (also called
 #   installed), absent, purged, held, latest. Default is installed.
 #
+# [*service_ensure*]
+#   Whether opendkim service should be running.
+#   Defaults to undef, do not ensure any state.
+#
 # === Examples
 #
 #  include 'opendkim'
@@ -31,7 +35,8 @@
 #
 class opendkim(
   $default_config = true,
-  $ensure_version = 'installed'
+  $ensure_version = 'installed',
+  $service_ensure = undef,
 ) inherits ::opendkim::params {
 
   package { $opendkim::params::package:
@@ -39,6 +44,7 @@ class opendkim(
     alias  => 'opendkim'
   }
   service { $opendkim::params::service:
+    ensure  => $service_ensure,
     enable  => true,
     require => Package['opendkim'];
   }
