@@ -52,10 +52,27 @@ class opendkim::params {
   $internalhosts = ['127.0.0.1']
 
   case $::operatingsystem {
-    'Ubuntu', 'Debian': {
+    'Ubuntu': {
       $package = 'opendkim'
       $service = 'opendkim'
       $user    = 'opendkim'
+
+      if versioncmp($facts['os']['release']['major'], '18.04') >= 0 {
+        $regenerate_service_file = true
+      } else {
+        $regenerate_service_file = false
+      }
+    }
+    'Debian': {
+      $package = 'opendkim'
+      $service = 'opendkim'
+      $user    = 'opendkim'
+
+      if versioncmp($facts['os']['release']['major'], '9') >= 0 {
+        $regenerate_service_file = true
+      } else {
+        $regenerate_service_file = false
+      }
     }
     default: {
       fail("Unsupported operatingsystem ${::operatingsystem}, fork me baby.")
