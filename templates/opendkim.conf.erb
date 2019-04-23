@@ -35,3 +35,4 @@ InternalHosts <%= @internalhosts.join(',') %>
 # Sign for example.com with key in /etc/mail/dkim.key using
 # selector '2007' (e.g. 2007._domainkey.example.com)
 
+UserID <%= scope.lookupvar('opendkim::params::user') %>
