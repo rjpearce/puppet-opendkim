@@ -84,4 +84,14 @@ class opendkim::config(
   }
 
   create_resources('::opendkim::socket', $create_sockets)
+
+  if $opendkim::params::regenerate_service_file {
+    # Debian 9 and above has a script to regenerate the systemd service file when the defaults file is updated
+    exec { '/lib/opendkim/opendkim.service.generate && /bin/systemctl daemon-reload':
+      refreshonly => true,
+      require     => Package['opendkim'],
+      subscribe   => Concat['/etc/default/opendkim'],
+      notify      => Service[$opendkim::params::service],
+    }
+  }
 }
