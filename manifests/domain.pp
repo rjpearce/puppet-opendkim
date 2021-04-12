@@ -38,7 +38,7 @@ define opendkim::domain(
   $subdomains          = false,
 ) {
 
-  if (empty($private_key_source) and empty($private_key_content)) {
+  if (empty($private_key_source) and type($private_key_content) !~ Type[Deferred] and empty($private_key_content)) {
     fail('one of private_key_source or private_key_content must be not empty!')
   }
 
