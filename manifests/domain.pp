@@ -30,10 +30,10 @@
 define opendkim::domain(
   $private_key_source  = undef,
   $private_key_content = undef,
-  $domain              = $name,
+  $domain              = $title,
   $selector            = 'mail',
   $key_folder          = '/etc/dkim',
-  $signing_key         = $name,
+  $signing_key         = $title,
   $user                = $opendkim::params::user,
   $subdomains          = false,
 ) {
@@ -61,24 +61,24 @@ define opendkim::domain(
     }
   }
 
-  concat::fragment{ "signingtable_${name}":
+  concat::fragment{ "signingtable_${title}":
     target  => '/etc/opendkim_signingtable.conf',
     content => "${signing_key} ${selector}._domainkey.${domain}\n",
-    order   => 10,
+    order   => "10 ${title}",
     require => File[$key_file],
   }
   if ($subdomains) {
-    concat::fragment{ "signingtable_${name}_subdomains":
+    concat::fragment{ "signingtable_${title}_subdomains":
       target  => '/etc/opendkim_signingtable.conf',
       content => ".${signing_key} ${selector}._domainkey.${domain}\n",
-      order   => 10,
+      order   => "10 ${title}",
       require => File[$key_file],
     }
   }
-  concat::fragment{ "keytable_${name}":
+  concat::fragment{ "keytable_${title}":
     target  => '/etc/opendkim_keytable.conf',
     content => "${selector}._domainkey.${domain} ${domain}:${selector}:${key_file}\n",
-    order   => 10,
+    order   => "10 ${title}",
     require => File[$key_file],
   }
 }
